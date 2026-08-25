@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F8FAFC">
+<title>BagBee</title>
+<style>
+  :root {
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --text: #0F172A;
+    --muted: #64748B;
+    --indigo: #4F46E5;
+    --indigo-dark: #4338CA;
+    --indigo-soft: #EEF2FF;
+    --neutral: #F1F5F9;
+    --danger: #DC2626;
+    --danger-soft: #FEF2F2;
+    --success: #10B981;
+    --success-soft: #ECFDF5;
+    --warning: #F59E0B;
+    --warning-soft: #FFFBEB;
+    --radius: 16px;
+    --shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.4 Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app {
+    max-width: 1160px;
+    margin: auto;
+    padding: 12px 16px 24px;
+  }
+
+  button { font: inherit; }
+
+  /* Top Header */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0 12px;
+  }
+
+  .brand {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--indigo);
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 18px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+  }
+
+  /* Cursive running letter format in black for BagBee title */
+  .brand b {
+    font-family: 'Brush Script MT', 'Dancing Script', 'Caveat', 'Comic Sans MS', cursive;
+    font-size: 28px;
+    color: #000000;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .brand small { display: block; color: var(--muted); font-size: 11px; }
+
+  .conn {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    background: var(--card);
+    padding: 6px 12px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+  }
+
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+    margin-right: 6px;
+  }
+
+  .dot.on {
+    background: var(--success);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    gap: 4px;
+    overflow: auto;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+
+  .nav button {
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .nav button:hover {
+    color: var(--text);
+    background: var(--neutral);
+  }
+
+  .nav button.active {
+    background: var(--indigo-soft);
+    color: var(--indigo);
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* Hero Section & Cards - Optimized for Above-the-Fold Visibility */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.45fr 0.55fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .heroCard {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  .status {
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 850;
+    letter-spacing: -0.03em;
+    margin: 2px 0;
+    line-height: 1.1;
+  }
+
+  .status.good { color: var(--indigo); }
+  .status.warn { color: var(--warning); }
+  .status.bad { color: var(--danger); }
+
+  .sub { color: var(--muted); font-size: 12px; }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  /* Buttons */
+  .btn {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn:hover { background: var(--neutral); }
+
+  .btn.primary {
+    background: var(--indigo);
+    color: #FFFFFF;
+    border-color: var(--indigo);
+  }
+
+  .btn.primary:hover {
+    background: var(--indigo-dark);
+    border-color: var(--indigo-dark);
+  }
+
+  .btn.danger {
+    background: var(--danger-soft);
+    color: var(--danger);
+    border-color: rgba(220, 38, 38, 0.2);
+  }
+
+  .btn.danger:hover {
+    background: var(--danger);
+    color: #FFFFFF;
+  }
+
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: var(--neutral) !important;
+    color: var(--muted) !important;
+    border-color: var(--border) !important;
+  }
+
+  /* Quick Info Panel */
+  .quick { padding: 14px 18px; }
+  .quick h3 { font-size: 12px; margin: 0 0 8px; color: var(--text); font-weight: 800; }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding: 6px 0;
+    font-size: 12px;
+  }
+  .row:last-child { border: 0; }
+  .row span { color: var(--muted); }
+  .row b { color: var(--text); font-weight: 700; }
+
+  /* 3 Live Telemetry Cards */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .sensor {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .name {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .val {
+    font-size: 24px;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+    margin: 4px 0;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .unit { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+  .state {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--indigo);
+  }
+
+  .sensor.warning {
+    border-color: rgba(245, 158, 11, 0.4);
+    background: var(--warning-soft);
+  }
+  .sensor.warning .state { color: var(--warning); }
+  .sensor.warning .val { color: var(--warning); }
+
+  .sensor.danger {
+    border-color: rgba(220, 38, 38, 0.4);
+    background: var(--danger-soft);
+  }
+  .sensor.danger .state { color: var(--danger); }
+  .sensor.danger .val { color: var(--danger); }
+
+  /* Section Styles */
+  .section { margin-top: 20px; }
+  .sectionTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 8px;
+  }
+  .sectionTitle h2 { font-size: 14px; margin: 0; font-weight: 800; }
+  .sectionTitle span { font-size: 11px; color: var(--muted); }
+
+  /* Activity Feed */
+  .activity { padding: 4px 18px; }
+  .event {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .event:last-child { border: 0; }
+  .ico {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--neutral);
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+  }
+  .event b { font-size: 12px; color: var(--text); display: block; }
+  .event small { display: block; color: var(--muted); font-size: 10px; margin-top: 1px; }
+
+  /* Settings Page */
+  .settings { padding: 18px; }
+  .setting { padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .setting:last-child { border: 0; }
+  .setting label { display: flex; justify-content: space-between; font-weight: 750; font-size: 13px; color: var(--text); }
+  .setting small { display: block; color: var(--muted); margin-top: 4px; font-size: 11px; line-height: 1.3; }
+  .setting input[type=range] { width: 100%; accent-color: var(--indigo); margin-top: 10px; }
+
+  /* Custom Toggle Switch */
+  .toggle {
+    appearance: none;
+    width: 38px;
+    height: 20px;
+    border-radius: 20px;
+    background: var(--border);
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s ease;
+  }
+  .toggle:checked { background: var(--indigo); }
+  .toggle:after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    top: 3px;
+    left: 3px;
+    transition: left 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .toggle:checked:after { left: 21px; }
+
+  /* Exact Center Verification Modal */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 99999;
+  }
+
+  .overlay.show { display: flex !important; }
+
+  .alert {
+    width: min(440px, calc(100vw - 32px));
+    background: var(--card);
+    border: 2px solid var(--indigo);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+    text-align: center;
+  }
+
+  .alert h2 {
+    color: var(--text);
+    font-size: 24px;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+    margin: 6px 0 10px;
+  }
+
+  .alert p { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+
+  .alertBtns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .alertBtns .btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Toasts */
+  .toastHost {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(400px, calc(100% - 32px));
+    z-index: 100000;
+  }
+
+  .toast {
+    background: var(--text);
+    color: #FFFFFF;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+  }
+  .toast b { font-size: 12px; display: block; }
+  .toast span { display: block; color: var(--border); font-size: 11px; margin-top: 2px; }
+
+  .empty { text-align: center; padding: 24px; color: var(--muted); font-size: 12px; }
+  .footer { text-align: center; color: var(--muted); font-size: 11px; margin-top: 24px; font-weight: 600; }
+
+  @media(max-width: 800px) {
+    .hero { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media(max-width: 580px) {
+    .app { padding: 10px 12px 20px; }
+    .grid { grid-template-columns: 1fr; }
+    .heroCard { padding: 16px; }
+    .alert { padding: 20px; }
+    .alertBtns { grid-template-columns: 1fr; }
+    .actions .btn { flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div id="toasts" class="toastHost"></div>
+
+<main class="app">
+  <!-- Top Navigation Header -->
+  <header class="top">
+    <div class="brand">
+      <div class="logo">B</div>
+      <div>
+        <b>BagBee</b>
+        <small>Know when your bag moves.</small>
+      </div>
+    </div>
+    <div class="conn">
+      <span id="dot" class="dot"></span>
+      <span id="conn">Not connected</span>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <button class="active" data-p="dash">Dashboard</button>
+    <button data-p="sensors">Sensors</button>
+    <button data-p="activity">Activity</button>
+    <button data-p="settings">Settings</button>
+  </nav>
+
+  <!-- Dashboard Page -->
+  <section id="dash" class="page active">
+    <div class="hero">
+      <div class="card heroCard">
+        <div>
+          <div class="eyebrow">System status</div>
+          <div id="status" class="status">DISARMED</div>
+          <div id="sub" class="sub">Connect BagBee to begin.</div>
+        </div>
+        <div class="actions">
+          <button id="connect" class="btn primary">Connect BagBee</button>
+          <button id="arm" class="btn" disabled>Arm</button>
+          <button id="disarm" class="btn danger" disabled>Disarm</button>
+          <button id="stop" class="btn danger" disabled>Stop alarm</button>
+        </div>
+      </div>
+
+      <div class="card quick">
+        <h3>Device Info</h3>
+        <div class="row"><span>BLE State</span><b id="ble">Disconnected</b></div>
+        <div class="row"><span>Monitoring</span><b id="monitor">Off</b></div>
+        <div class="row"><span>Safe Altitude</span><b id="safe">—</b></div>
+        <div class="row"><span>Last Event</span><b id="last">—</b></div>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Display Cards - Positioned directly above the fold -->
+    <div id="cards" class="grid">
+      <div class="card sensor" id="cardTilt">
+        <div class="name">Tilt angle</div>
+        <div class="val" id="valTilt">— <span class="unit">°</span></div>
+        <div class="state" id="stateTilt">● NORMAL</div>
+      </div>
+      <div class="card sensor" id="cardAccel">
+        <div class="name">Horizontal Acceleration</div>
+        <div class="val" id="valAccel">— <span class="unit">G</span></div>
+        <div class="state" id="stateAccel">● NORMAL</div>
+      </div>
+      <div class="card sensor" id="cardAlt">
+        <div class="name">Altitude Change</div>
+        <div class="val" id="valAlt">— <span class="unit">m</span></div>
+        <div class="state" id="stateAlt">● NORMAL</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sectionTitle">
+        <h2>Last known safe state / Incident Location</h2>
+        <span id="safeTime">—</span>
+      </div>
+      <div id="safeBox" class="card activity">
+        <div class="empty">No safe state or incident recorded yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Sensor Page -->
+  <section id="sensors" class="page">
+    <div class="sectionTitle">
+      <h2>Sensor Detail</h2>
+      <span id="telemetryState">Waiting for live data</span>
+    </div>
+    <div id="detail" class="grid">
+      <div class="card sensor" id="cardTiltDetail">
+        <div class="name">Tilt angle</div>
+        <div class="val" id="valTiltDetail">— <span class="unit">°</span></div>
+        <div class="state" id="stateTiltDetail">● NORMAL</div>
+      </div>
+      <div class="card sensor" id="cardAccelDetail">
+        <div class="name">Horizontal Acceleration</div>
+        <div class="val" id="valAccelDetail">— <span class="unit">G</span></div>
+        <div class="state" id="stateAccelDetail">● NORMAL</div>
+      </div>
+      <div class="card sensor" id="cardAltDetail">
+        <div class="name">Altitude Change</div>
+        <div class="val" id="valAltDetail">— <span class="unit">m</span></div>
+        <div class="state" id="stateAltDetail">● NORMAL</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity Logs Page -->
+  <section id="activity" class="page">
+    <div class="sectionTitle">
+      <h2>Activity Log</h2>
+      <button id="clear" class="btn">Clear History</button>
+    </div>
+    <div id="events" class="card activity"></div>
+  </section>
+
+  <!-- Settings Page -->
+  <section id="settings" class="page">
+    <div class="card settings">
+      <div class="setting">
+        <label>Light gesture arming <input id="gesture" class="toggle" type="checkbox" checked></label>
+        <small>Two deliberate light cuts within two seconds to trigger system arming.</small>
+      </div>
+      <div class="setting">
+        <label>Altitude sensitivity <span id="av">0.40 m</span></label>
+        <input id="ar" type="range" min=".2" max="2" step=".05" value=".4">
+        <small>Lower values detect smaller altitude changes. Firmware configuration required.</small>
+      </div>
+      <div class="setting">
+        <label>Motion sensitivity <span id="mv">0.60 G</span></label>
+        <input id="mr" type="range" min=".2" max="2" step=".05" value=".6">
+        <small>Display preference threshold for jerk and movement detection.</small>
+      </div>
+      <div class="setting">
+        <label>Verification timeout <span id="vv">8.0 s</span></label>
+        <input id="vr" type="range" min="1" max="10" step=".5" value="8">
+        <small>Timeout duration allotted for verification confirmation before alarm sounds.</small>
+      </div>
+      <div class="setting">
+        <label>Popup notifications <input id="notify" class="toggle" type="checkbox" checked></label>
+        <small>Show visual toast notifications for status updates from ESP32.</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">Local-first • BLE • No Wi-Fi required</div>
+</main>
+
+<!-- Center-Screen Verification Modal -->
+<div id="overlay" class="overlay">
+  <div class="alert">
+    <div class="eyebrow">BagBee Needs Attention</div>
+    <h2>Movement detected</h2>
+    <p id="reason">Was this you?</p>
+    <div class="alertBtns">
+      <button id="yes" class="btn primary">Yes — it was me</button>
+      <button id="no" class="btn danger">No — sound alarm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/*
+  BagBee Web Application Core
+  All original state machine, BLE protocol, and parser implementations preserved.
+*/
+
+const UUID = {
+  service:'8e264ab1-74ca-453c-8954-9c1eccd44552',
+  alert:'e90e73be-d136-4f95-bc6e-5d05d5ad8417',
+  command:'8cf10e68-be2d-4953-93d7-621325609f09',
+  telemetry:'3b0a2f10-7e57-4f3e-9b5c-3e1f6d2a1101'
+};
+
+let dev=null, cmd=null;
+let state='DISARMED', events=[], notify=true, safeAlt=null;
+let verificationOpen=false;
+let verificationReason='Movement detected';
+let verificationDeadline=0;
+let verificationTimer=null;
+let currentTelemetry=null;
+let lastTelemetryAt=0;
+
+const $=x=>document.getElementById(x);
+const esc=x=>String(x).replace(/[&<>"']/g,c=>({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[c]));
+
+function toast(a,b){
+  if(!notify)return;
+  let x=document.createElement('div');
+  x.className='toast';
+  x.innerHTML='<b>'+esc(a)+'</b><span>'+esc(b)+'</span>';
+  $('toasts').appendChild(x);
+  setTimeout(()=>x.remove(),4200);
+}
+
+function event(t,l='ok'){
+  events.unshift({t,d:new Date(),l});
+  events=events.slice(0,50);
+  $('last').textContent=t;
+  $('events').innerHTML=events.length
+    ? events.map(e=>'<div class="event"><div class="ico">'+
+      (e.l==='bad'?'🚨':e.l==='warn'?'⚠':'✓')+
+      '</div><div><b>'+esc(e.t)+'</b><small>'+
+      e.d.toLocaleTimeString()+'</small></div></div>').join('')
+    : '<div class="empty">No events yet.</div>';
+}
+
+function captureStolenLocation(){
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude.toFixed(6);
+        const lng = position.coords.longitude.toFixed(6);
+        const time = new Date().toLocaleTimeString();
+        const mapUrl = `https://maps.google.com/?q=${lat},${lng}`;
+
+        event(`Incident location captured: ${lat}, ${lng}`, 'bad');
+        toast('Location Captured', `${lat}, ${lng}`);
+
+        $('safeBox').innerHTML = `
+          <div class="event">
+            <div class="ico">🚨</div>
+            <div>
+              <b>Incident Location Captured</b>
+              <small>${time} • <a href="${mapUrl}" target="_blank" style="color:var(--danger); font-weight:bold; text-decoration:underline;">View on Google Maps (${lat}, ${lng})</a></small>
+            </div>
+          </div>`;
+      },
+      (err) => {
+        event('Location capture failed: ' + err.message, 'warn');
+      },
+      { enableHighAccuracy: true, timeout: 5000 }
+    );
+  }
+}
+
+function stateSet(s,sub){
+  state=s;
+  $('status').textContent=s;
+  $('status').className='status '+
+    (s==='ARMED'||s==='MONITORING'?'good':
+     s==='VERIFY'?'warn':
+     s==='ALARM'?'bad':'');
+  $('sub').textContent=sub;
+  $('monitor').textContent=
+    (s==='ARMED'||s==='MONITORING')?'On':'Off';
+  $('stop').disabled=!dev||s!=='ALARM';
+  $('disarm').disabled=!dev||s==='DISARMED';
+}
+
+function renderTelemetryUI(tilt, accel, altChange, tiltWarn, accelWarn, altWarn){
+  const tStr = Number.isFinite(tilt) ? tilt.toFixed(1) : '—';
+  const aStr = Number.isFinite(accel) ? accel.toFixed(2) : '—';
+  const altStr = Number.isFinite(altChange) ? altChange.toFixed(2) : '—';
+
+  // Dashboard Cards
+  $('valTilt').innerHTML = tStr + ' <span class="unit">°</span>';
+  $('valAccel').innerHTML = aStr + ' <span class="unit">G</span>';
+  $('valAlt').innerHTML = altStr + ' <span class="unit">m</span>';
+
+  $('stateTilt').textContent = tiltWarn ? '● TILT DETECTED' : '● NORMAL';
+  $('stateAccel').textContent = accelWarn ? '● MOTION DETECTED' : '● NORMAL';
+  $('stateAlt').textContent = altWarn ? '● LIFT DETECTED' : '● NORMAL';
+
+  $('cardTilt').className = 'card sensor ' + (tiltWarn ? 'warning' : '');
+  $('cardAccel').className = 'card sensor ' + (accelWarn ? 'warning' : '');
+  $('cardAlt').className = 'card sensor ' + (altWarn ? 'warning' : '');
+
+  // Detail Tab Cards
+  $('valTiltDetail').innerHTML = tStr + ' <span class="unit">°</span>';
+  $('valAccelDetail').innerHTML = aStr + ' <span class="unit">G</span>';
+  $('valAltDetail').innerHTML = altStr + ' <span class="unit">m</span>';
+
+  $('stateTiltDetail').textContent = tiltWarn ? '● TILT DETECTED' : '● NORMAL';
+  $('stateAccelDetail').textContent = accelWarn ? '● MOTION DETECTED' : '● NORMAL';
+  $('stateAltDetail').textContent = altWarn ? '● LIFT DETECTED' : '● NORMAL';
+
+  $('cardTiltDetail').className = 'card sensor ' + (tiltWarn ? 'warning' : '');
+  $('cardAccelDetail').className = 'card sensor ' + (accelWarn ? 'warning' : '');
+  $('cardAltDetail').className = 'card sensor ' + (altWarn ? 'warning' : '');
+}
+
+function safe(){
+  if(currentTelemetry && Number.isFinite(currentTelemetry.altitude)){
+    safeAlt = currentTelemetry.altitude.toFixed(2);
+    $('safe').textContent = safeAlt + ' m';
+    $('safeTime').textContent = new Date().toLocaleTimeString();
+    $('safeBox').innerHTML =
+      '<div class="event"><div class="ico">✓</div><div>'+
+      '<b>Last known safe state</b><small>Altitude '+
+      esc(safeAlt)+' m • '+new Date().toLocaleTimeString()+
+      '</small></div></div>';
+  }
+}
+
+/* Modal and Verification Control */
+function enableVerificationButtons(){
+  const yes=$('yes');
+  const no=$('no');
+  if(!yes || !no)return;
+  yes.disabled=false;
+  no.disabled=false;
+}
+
+function startVerification(reason, timeoutMs){
+  const newReason = reason && reason.trim() ? reason.trim() : 'Movement detected';
+  const isNewVerification = !verificationOpen;
+
+  verificationReason = newReason;
+
+  if(isNewVerification){
+    const t=Number(timeoutMs);
+    verificationDeadline = Number.isFinite(t) && t > 0 ? Date.now()+t : Date.now()+8000;
+    verificationOpen=true;
+
+    $('overlay').classList.add('show');
+    enableVerificationButtons();
+
+    event('Verification required: '+verificationReason, 'warn');
+    toast('Verification required', verificationReason);
+  }
+
+  $('reason').textContent = verificationReason + ' — Was this you?';
+  stateSet('VERIFY', 'Owner confirmation required.');
+  updateVerificationTimer();
+}
+
+function updateVerificationTimer(){
+  if(!verificationOpen)return;
+
+  if(verificationDeadline){
+    let left=Math.max(0,verificationDeadline-Date.now());
+    let seconds=Math.ceil(left/1000);
+
+    if(seconds>0){
+      $('reason').textContent = verificationReason + ' — Was this you? ('+seconds+'s)';
+    }
+
+    if(left<=0){
+      stopVerificationTimer();
+      return;
+    }
+  }
+
+  if(!verificationTimer){
+    verificationTimer=setTimeout(()=>{
+      verificationTimer=null;
+      updateVerificationTimer();
+    },250);
+  }
+}
+
+function stopVerificationTimer(){
+  if(verificationTimer){
+    clearTimeout(verificationTimer);
+    verificationTimer=null;
+  }
+}
+
+function closeVerification(){
+  verificationOpen=false;
+  verificationDeadline=0;
+  stopVerificationTimer();
+  $('overlay').classList.remove('show');
+}
+
+/* Message Parser */
+function parse(m){
+  m=String(m||'').trim();
+  if(!m)return;
+
+  console.log('[BagBee BLE]',m);
+
+  if(m.startsWith('T|')){
+    parseTelemetry(m);
+    return;
+  }
+
+  let l=m.toLowerCase();
+
+  if(l==='verify' || l.startsWith('verify|') || l.includes('verify now') || l.includes('verification required')){
+    let parts=m.split('|');
+    let reason = parts.length>1 && parts[1].trim() ? parts[1].trim() : 'Movement detected';
+    let timeout = parts.length>2 ? Number(parts[2]) : 10000;
+    startVerification(reason,timeout);
+    return;
+  }
+
+  if(l==='verified' || l.includes('owner verified')){
+    closeVerification();
+    stateSet('ARMED','Monitoring resumed.');
+    event('Owner verified','ok');
+    toast('Verified','Monitoring resumed.');
+    return;
+  }
+
+  if(l.includes('bag lifted') || l.includes('bag tilted') || l.includes('sudden movement')){
+    if(verificationOpen){
+      verificationReason=m;
+      $('reason').textContent=m+' — Was this you?';
+      return;
+    }
+    startVerification(m,10000);
+    return;
+  }
+
+  if(l.includes('stolen') || l.includes('alarm')){
+    closeVerification();
+    stateSet('ALARM','Unauthorized movement confirmed.');
+    event('BAG STOLEN - ALARM','bad');
+    toast('BAG STOLEN','Alarm is active.');
+    captureStolenLocation();
+    return;
+  }
+
+  if(l.includes('stopped')){
+    closeVerification();
+    stateSet('DISARMED','Alarm stopped.');
+    event('Alarm stopped','ok');
+    return;
+  }
+
+  if(l.includes('armed')){
+    stateSet('ARMED','Monitoring');
+  }
+
+  if(l.includes('disarmed') || l.includes('ready')){
+    closeVerification();
+    stateSet('DISARMED','Use the light gesture twice or press Arm.');
+  }
+
+  event(m, l.includes('warning')||l.includes('change')?'warn':'ok');
+  toast('BagBee',m);
+}
+
+/* Telemetry Processing */
+function parseTelemetry(m){
+  if(!m || !String(m).startsWith('T|')) return;
+
+  lastTelemetryAt = Date.now();
+  if($('telemetryState')) $('telemetryState').textContent='● Live telemetry active';
+
+  const p=String(m).trim().split('|');
+  if(p.length < 14) return;
+
+  const st=p[1] || 'DISARMED';
+  const alt=Number(p[2]);
+  const tx=Number(p[3]);
+  const ty=Number(p[4]);
+  const acc=Number(p[5]);
+  const base=Number(p[11]);
+  const reason=p[12] || '';
+  const remaining=Number(p[13] || 0);
+
+  currentTelemetry = {
+    state: st, altitude: alt, tiltX: tx, tiltY: ty,
+    accel: acc, baseline: base, reason, remaining
+  };
+
+  const altChange = (Number.isFinite(alt) && Number.isFinite(base)) ? Math.abs(alt - base) : NaN;
+  const tilt = Math.max(Math.abs(Number.isFinite(tx) ? tx : 0), Math.abs(Number.isFinite(ty) ? ty : 0));
+
+  const altBad = Number.isFinite(altChange) && altChange > 0.40;
+  const motionBad = Number.isFinite(tilt) && tilt > 15;
+  const accelBad = Number.isFinite(acc) && acc > 0.60;
+
+  renderTelemetryUI(tilt, acc, altChange, motionBad, accelBad, altBad);
+
+  if(st==='VERIFY'){
+    const reasonText = reason.trim() || 'Movement detected';
+    if(!verificationOpen){
+      startVerification(reasonText, remaining > 0 ? remaining : 8000);
+    } else {
+      enableVerificationButtons();
+    }
+    return;
+  }
+
+  if(st==='ALARM'){
+    if(state !== 'ALARM'){
+      captureStolenLocation();
+    }
+    closeVerification();
+    stateSet('ALARM','Unauthorized movement confirmed.');
+    return;
+  }
+
+  if(st==='ARMED'){
+    if(!verificationOpen){
+      stateSet('ARMED', motionBad ? 'Tilt checking' : accelBad ? 'Motion checking' : altBad ? 'Lift checking' : 'Monitoring');
+    }
+    safe();
+    return;
+  }
+
+  if(st==='DISARMED'){
+    if(!verificationOpen){
+      stateSet('DISARMED','Use light gesture or tap Arm.');
+    }
+  }
+}
+
+/* BLE Communications */
+async function send(c){
+  if(!cmd){
+    toast('Not connected','Connect BagBee over BLE first.');
+    return false;
+  }
+  try{
+    await cmd.writeValue(new TextEncoder().encode(c));
+    event('Command: '+c,'ok');
+    return true;
+  }catch(e){
+    toast('Command failed',e.message);
+    return false;
+  }
+}
+
+async function connect(){
+  if(!navigator.bluetooth){
+    toast('Web Bluetooth unavailable','Use a supported mobile browser.');
+    return;
+  }
+
+  try{
+    dev=await navigator.bluetooth.requestDevice({
+      filters:[{ services:[UUID.service] }]
+    });
+
+    dev.addEventListener('gattserverdisconnected',()=>{
+      cmd=null;
+      $('dot').className='dot';
+      $('conn').textContent='Not connected';
+      $('ble').textContent='Disconnected';
+      $('arm').disabled=true;
+      $('disarm').disabled=true;
+      $('stop').disabled=true;
+      closeVerification();
+      toast('BagBee disconnected','BLE connection lost.');
+      event('BLE disconnected','warn');
+    });
+
+    let server=await dev.gatt.connect();
+    let service=await server.getPrimaryService(UUID.service);
+
+    const alertChar = await service.getCharacteristic(UUID.alert);
+    cmd = await service.getCharacteristic(UUID.command);
+    const telemetryChar = await service.getCharacteristic(UUID.telemetry);
+
+    const decodeBle = e => new TextDecoder().decode(new Uint8Array(e.target.value.buffer)).trim();
+
+    await alertChar.startNotifications();
+    alertChar.addEventListener('characteristicvaluechanged', e => parse(decodeBle(e)));
+
+    await telemetryChar.startNotifications();
+    telemetryChar.addEventListener('characteristicvaluechanged', e => parseTelemetry(decodeBle(e)));
+
+    event('Live sensor telemetry connected','ok');
+    $('dot').className='dot on';
+    $('conn').textContent='BagBee connected';
+    $('ble').textContent='Connected';
+    $('arm').disabled=false;
+    $('disarm').disabled=false;
+    toast('Connected','BagBee is ready.');
+    event('BLE connected','ok');
+
+  }catch(e){
+    console.error(e);
+    toast('Connection failed',e.message);
+    event('BLE connection failed','warn');
+  }
+}
+
+/* Control Bindings */
+$('connect').onclick=connect;
+$('arm').onclick=()=>send('arm');
+$('disarm').onclick=()=>send('disarm');
+$('stop').onclick=()=>send('stop');
+
+$('yes').onclick=async()=>{
+  enableVerificationButtons();
+  const ok=await send('yes');
+  if(ok){
+    toast('Verification sent','BagBee is confirming…');
+    enableVerificationButtons();
+  }
+};
+
+$('no').onclick=async()=>{
+  enableVerificationButtons();
+  const ok=await send('no');
+  if(ok){
+    toast('Alarm requested','BagBee is activating the alarm…');
+    enableVerificationButtons();
+    captureStolenLocation();
+  }
+};
+
+$('clear').onclick=()=>{
+  events=[];
+  $('events').innerHTML='<div class="empty">No events yet.</div>';
+};
+
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  $(b.dataset.p).classList.add('active');
+});
+
+$('notify').onchange=e=>notify=e.target.checked;
+$('ar').oninput=e=>$('av').textContent=Number(e.target.value).toFixed(2)+' m';
+$('mr').oninput=e=>$('mv').textContent=Number(e.target.value).toFixed(2)+' G';
+$('vr').oninput=e=>$('vv').textContent=Number(e.target.value).toFixed(1)+' s';
+
+setInterval(()=>{
+  if(!dev || !dev.gatt || !dev.gatt.connected) return;
+  if(lastTelemetryAt && Date.now()-lastTelemetryAt > 1500){
+    if($('telemetryState')) $('telemetryState').textContent='● Waiting for telemetry packet';
+  }
+},500);
+
+event('BagBee app ready');
+stateSet('DISARMED','Connect BagBee to begin.');
+</script>
+</body>
+</html>
