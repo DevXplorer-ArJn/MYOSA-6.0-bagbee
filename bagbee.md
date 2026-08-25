@@ -80,7 +80,7 @@ This makes alerts more meaningful by giving the owner a short verification windo
 ### Videos
 
 <video controls width="100%">
-<source src="/bagbee-demo.mp4" type="video/mp4">
+<source src="bagbee-demo.mp4" type="video/mp4">
 </video>
 
 ---
