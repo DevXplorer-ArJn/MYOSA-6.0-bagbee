@@ -361,9 +361,8 @@ The system completes the complete security pipeline:
 
 ---
 
-# File Structure
+## File Structure
 
-```text
 /MYOSA-6.0-bagbee
 ├── README.md
 ├── LICENSE
@@ -374,10 +373,10 @@ The system completes the complete security pipeline:
 ├── ble-alert.jpg
 ├── alarm-demo.jpg
 └── bagbee-demo.mp4
-```md
+
 ---
 
-# License
+## License
 
 This project is released under the **MIT License**.
 
@@ -385,7 +384,7 @@ The included `LICENSE` file contains the complete license terms for this reposit
 
 ---
 
-# Contribution Notes
+## Contribution Notes
 
 BagBee was developed as part of **MYOSA Event 6.0 - IEEE SENSORS 2026** to demonstrate the application of an edge-based IoT platform for a practical personal-security solution.
 
