@@ -2,7 +2,7 @@
 publishDate: 2026-08-25
 title: BagBee
 excerpt: BagBee is a touchless, verified-alert luggage security node that detects suspicious movement, notifies the owner silently, and escalates only when unverified.
-image: /assets/images/bagbee/bagbee-cover.jpg
+image: bagbee-cover.jpg
 tags:
   - iot
   - esp32
