@@ -1,12 +1,9 @@
----
-publishDate: 2026-08-23
-title: BagBee - A Touchless, Verified-Alert Security Node for Unattended Luggage on Long-Distance Train Journeys
-excerpt: BagBee is a portable luggage-security system that combines touchless gesture arming, motion-based theft detection, silent BLE alerts, owner verification, and staged alarm escalation using the MYOSA Mini IoT Kit.
-image: bagbee-cover.jpg
-tags:
-- IoT
-- ESP32
-- Security
+# BagBee - Touchless Security Node for Unattended Luggage
+
+**Published:** August 23, 2026  
+**Category:** IoT Security | ESP32 | Edge Computing  
+**Tags:** `IoT` `ESP32` `Security` `Luggage-Protection` `Motion-Detection` `BLE`
+
 ---
 
 > *Don't just detect movement. Verify it.*
@@ -17,7 +14,7 @@ tags:
 
 BagBee was developed as part of **MYOSA Event 6.0 - IEEE SENSORS 2026** using the MYOSA Mini IoT Kit.
 
-We would like to acknowledge the MYOSA platform for providing an embedded sensing environment that allowed us to explore a practical edge-based IoT security application. We also thank our faculty mentor, Dr. Lekshmi Mohan, for her guidance and support throughout the development of this project.
+We would like to acknowledge the MYOSA platform for providing an embedded sensing environment that allowed us to explore a practical edge-based IoT security application. We also thank our faculty mentors for their guidance and support throughout the development process.
 
 ---
 
@@ -25,17 +22,17 @@ We would like to acknowledge the MYOSA platform for providing an embedded sensin
 
 BagBee is a **touchless, verified-alert security node designed for unattended luggage during long-distance train journeys**.
 
-The idea comes from a familiar situation faced by railway passengers: having to sleep or rest while their luggage remains unattended under or beside their berth. Conventional solutions such as chains, locks, or basic motion alarms have significant limitations.
+The idea comes from a familiar situation faced by railway passengers: having to sleep or rest while their luggage remains unattended under or beside their berth. Conventional solutions such as chains, locks, or basic motion alarms each have limitations. Chains are cumbersome and inconvenient. Basic motion alarms produce false alerts in response to normal train vibration.
 
-A simple motion alarm can therefore create frequent false alarms. At the same time, immediately triggering a loud alarm does not give the owner an opportunity to determine whether the movement was intentional or suspicious.
+A simple motion alarm can therefore create frequent false alarms. At the same time, immediately triggering a loud alarm does not give the owner an opportunity to determine whether the movement was intentional or accidental.
 
 BagBee approaches this problem differently.
 
-Instead of treating every movement as a theft event, the system follows a **layered detection-and-verification pipeline**. A touchless gesture sequence is used as a security PIN for arming and disarming, combined with motion analysis to understand the nature of detected movement.
+Instead of treating every movement as a theft event, the system follows a **layered detection-and-verification pipeline**. A touchless gesture sequence is used as a security PIN for arming and disarming. This prevents casual interference.
 
 When suspicious movement is detected, BagBee does **not immediately sound the alarm**.
 
-It first sends a silent pre-alert to the owner's smartphone using Bluetooth Low Energy. The owner is given a short verification window. If the movement was intentional, the event can be silently dismissed.
+It first sends a silent pre-alert to the owner's smartphone using Bluetooth Low Energy. The owner is given a short verification window. If the movement was intentional, the event can be silently dismissed without any disturbance.
 
 This transforms the traditional:
 
@@ -241,9 +238,9 @@ This is particularly relevant for a moving train environment where network conne
 
 ---
 
-# Usage Instructions
+## Usage Instructions
 
-## Hardware Setup
+### Hardware Setup
 
 1. Connect the MYOSA Mini IoT Kit components required for BagBee.
 2. Connect the additional piezo buzzer to the ESP32 GPIO.
@@ -253,7 +250,7 @@ This is particularly relevant for a moving train environment where network conne
 
 ---
 
-## Arming the System
+### Arming the System
 
 1. Power on the BagBee device.
 2. Wait for the OLED setup indication.
@@ -263,7 +260,7 @@ This is particularly relevant for a moving train environment where network conne
 
 ---
 
-## Monitoring Mode
+### Monitoring Mode
 
 Once armed, BagBee continuously monitors the luggage using the MPU6050 IMU.
 
@@ -273,7 +270,7 @@ The system remains silent unless the movement characteristics match the configur
 
 ---
 
-## Suspicious Movement Detection
+### Suspicious Movement Detection
 
 When suspicious movement is detected:
 
@@ -284,7 +281,7 @@ When suspicious movement is detected:
 
 ---
 
-## Verification
+### Verification
 
 If the owner confirms that the movement was intentional, the system can be silently disarmed.
 
@@ -292,7 +289,7 @@ If no confirmation is received during the verification period, BagBee proceeds t
 
 ---
 
-## Alarm Escalation
+### Alarm Escalation
 
 The piezo buzzer is activated and the OLED provides a local warning indication.
 
@@ -302,9 +299,9 @@ The system completes the complete security pipeline:
 
 ---
 
-# Tech Stack
+## Tech Stack
 
-## Hardware
+### Hardware
 
 * **MYOSA Mini IoT Kit**
 * **ESP32** - Central controller and Bluetooth Low Energy communication
@@ -315,7 +312,7 @@ The system completes the complete security pipeline:
 * **3.7V LiPo Cell** - Portable power source
 * **Charging and Protection Circuit** - Battery management
 
-## Firmware
+### Firmware
 
 * **C++**
 * **Arduino / ESP32 Framework**
@@ -325,9 +322,9 @@ The system completes the complete security pipeline:
 
 ---
 
-# Requirements / Installation
+## Requirements / Installation
 
-## Hardware Requirements
+### Hardware Requirements
 
 * MYOSA Mini IoT Kit
 * ESP32 motherboard/core
@@ -341,7 +338,7 @@ The system completes the complete security pipeline:
 
 ---
 
-## Software Requirements
+### Software Requirements
 
 * Arduino IDE or compatible ESP32 development environment
 * ESP32 board support package
@@ -350,7 +347,7 @@ The system completes the complete security pipeline:
 
 ---
 
-## Installation
+### Installation
 
 1. Install ESP32 board support in the Arduino development environment.
 2. Install required libraries for the sensors and OLED display.
@@ -363,7 +360,7 @@ The system completes the complete security pipeline:
 
 ---
 
-# File Structure
+## File Structure
 
 ```text
 /MYOSA-6.0-bagbee
@@ -383,7 +380,7 @@ The system completes the complete security pipeline:
 
 ---
 
-# License
+## License
 
 This project is released under the **MIT License**.
 
@@ -391,11 +388,11 @@ The included `LICENSE` file contains the complete license terms for this reposit
 
 ---
 
-# Contribution Notes
+## Contribution Notes
 
 BagBee was developed as part of **MYOSA Event 6.0 - IEEE SENSORS 2026** to demonstrate the application of an edge-based IoT platform for a practical personal-security solution.
 
-Future improvements may include:
+### Future Improvements
 
 - Improved motion classification and filtering accuracy.
 - GPS Integration
