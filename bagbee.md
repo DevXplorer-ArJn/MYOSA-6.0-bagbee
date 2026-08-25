@@ -114,7 +114,6 @@ This sequence demonstrates the core security concept of BagBee:
 
 **Detect → Notify → Verify → Escalate**
 
-If `alarm-demo.jpg` or `bagbee-demo.mp4` is missing in your local/project copy, place those files in the same folder as `bagbee.md` using these exact names before final MYOSA submission.
 
 ---
 
