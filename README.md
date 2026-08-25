@@ -291,7 +291,7 @@ See [`LICENSE`](LICENSE) for details.
 
 ---
 
-## 🏆 MYOSA Event 6.0
+##  MYOSA Event 6.0
 
 Developed as a project for **MYOSA Event 6.0 — IEEE SENSORS 2026**.
 
