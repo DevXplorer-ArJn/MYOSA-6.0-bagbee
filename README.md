@@ -233,13 +233,16 @@ MYOSA-6.0-bagbee/
 ├── LICENSE
 ├── bagbee.md
 │
-├── bagbee-cover.jpg
-├── prototype.jpg
-├── gesture-arming.jpg
-├── ble-alert.jpg
-├── alarm-demo.jpg
-│
 ├── bagbee-demo.mp4
+│
+├── assets/
+│   └── images/
+│       └── bagbee/
+│           ├── bagbee-cover.jpg
+│           ├── prototype.jpg
+│           ├── gesture-arming.jpg
+│           ├── ble-alert.jpg
+│           └── alarm-demo.jpg
 │
 └── src/
     └── bagbee.ino
