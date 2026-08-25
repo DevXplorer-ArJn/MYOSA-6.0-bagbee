@@ -22,7 +22,7 @@ We would like to acknowledge the MYOSA platform for providing an embedded sensin
 
 BagBee is a **touchless, verified-alert security node designed for unattended luggage during long-distance train journeys**.
 
-The idea comes from a familiar situation faced by railway passengers: having to sleep or rest while their luggage remains unattended under or beside their berth. Conventional solutions such as chains, locks, or basic motion alarms each have limitations. Chains are cumbersome and inconvenient. Basic motion alarms produce false alerts in response to normal train vibration.
+The idea comes from a familiar situation faced by railway passengers: having to sleep or rest or at the time of using washrooms while their luggage remains unattended under or beside their berth. Conventional solutions such as chains, locks, or basic motion alarms each have limitations. Chains are cumbersome and inconvenient. Basic motion alarms produce false alerts in response to normal train vibration.
 
 A simple motion alarm can therefore create frequent false alarms. At the same time, immediately triggering a loud alarm does not give the owner an opportunity to determine whether the movement was intentional or accidental.
 
