@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-08-25
-title: BagBee
+title: BagBee - The Luggage Sentinel
 excerpt: BagBee is a touchless, verified-alert luggage security node that detects suspicious movement, silently notifies the owner, and escalates only when the alert goes unverified.
 image: bagbee-cover.jpg
 tags:
