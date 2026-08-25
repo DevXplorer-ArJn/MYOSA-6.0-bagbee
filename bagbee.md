@@ -6,7 +6,7 @@
 
 ---
 
-> *Don't just detect movement. Verify it.*
+> *Turning ordinary motion sensing into intelligent luggage protection.*
 
 ---
 
