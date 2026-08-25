@@ -1,15 +1,15 @@
 ---
 publishDate: 2026-08-25
 title: BagBee
-excerpt: BagBee is a touchless, verified-alert luggage security node that detects suspicious movement, notifies the owner silently, and escalates only when unverified.
+excerpt: BagBee is a touchless, verified-alert luggage security node that detects suspicious movement, silently notifies the owner, and escalates only when the alert goes unverified.
 image: bagbee-cover.jpg
 tags:
   - iot
   - esp32
-  - security
-  - luggage-protection
-  - motion-detection
   - ble
+  - luggage-security
+  - motion-detection
+  - embedded-systems
 ---
 
 > Turning ordinary motion sensing into intelligent luggage protection.
@@ -18,33 +18,70 @@ tags:
 
 ## Acknowledgements
 
-BagBee was developed as part of **MYOSA Event 6.0 - IEEE SENSORS 2026** using the MYOSA Mini IoT Kit.
+BagBee was developed as part of **MYOSA Event 6.0 — IEEE SENSORS 2026**, built using the **MYOSA Mini IoT Kit**.
 
-We acknowledge the MYOSA platform for enabling practical embedded sensing development and thank our faculty mentors for guidance during project development.
+We gratefully acknowledge the MYOSA platform for making practical, hands-on embedded sensing development possible, and we thank our faculty mentors for their guidance and encouragement throughout the project.
 
 ---
 
 ## Overview
 
-BagBee is a **touchless, verified-alert security node for unattended luggage during long-distance train journeys**.
+### The Problem
 
-It solves a common travel problem: luggage often remains unattended while passengers sleep, rest, or use washrooms. Conventional chains/locks are inconvenient, while simple motion alarms frequently trigger false alerts due to train vibration.
+On long-distance train journeys, passengers routinely leave their luggage unattended — while sleeping, resting, or stepping away from their seat. Existing protection options fall short in a few key ways:
 
-BagBee uses a layered pipeline instead of immediate siren-first logic:
+* Mechanical locks and chains can only delay unauthorized access; they can't prevent or report it.
+* Simple motion alarms trigger constantly from ordinary train vibration, training owners to ignore them.
+* Instant alarms leave no room for the owner to check whether a movement was actually a threat before the alarm goes off.
 
-**Movement → Detection → Silent Alert → Verification → Escalation**
+BagBee reframes luggage security around this gap — moving away from a blunt motion-triggered alarm and toward an **intelligent, verified-alert security system**.
 
-This makes alerts more meaningful by giving the owner a short verification window before audible alarm escalation.
+### The Solution
 
-**Who it is for:** long-distance rail passengers, sleeper-class travelers, and anyone needing portable unattended luggage monitoring.
+BagBee is a **touchless, verified-alert security node built for monitoring unattended luggage**. Rather than sounding an alarm the instant motion is sensed, it works through a layered decision flow:
 
-**How it works (high level):**
+```text
+Movement Detection
+        ↓
+Motion Analysis
+        ↓
+Silent BLE Alert
+        ↓
+Owner Verification
+        ↓
+Alarm Escalation (if unverified)
+```
 
-* Gesture PIN arms/disarms the node.
-* MPU6050-based motion sensing monitors luggage movement.
-* Filtering suppresses normal vibration noise.
-* ESP32 sends silent BLE pre-alert to owner.
-* No timely owner verification triggers buzzer alarm.
+This lets the system tell the difference between everyday environmental jostling and movement that actually looks like someone handling the bag.
+
+### Who It Is For
+
+BagBee is built for:
+
+* Long-distance railway passengers
+* Sleeper-class travelers
+* Backpack and luggage users
+* Anyone who needs portable, unattended asset monitoring
+
+### How It Works
+
+BagBee brings together several sensing and communication technologies:
+
+* **APDS9960 Gesture Sensor** — for touchless arming and disarming
+* **MPU6050 IMU** — for continuous motion monitoring
+* **ESP32** — for edge-based processing and decision-making
+* **BLE communication** — for silent alerts to the owner
+* **Piezo buzzer** — for final alarm escalation
+
+**Key features:**
+
+* Touchless gesture-based arming (no buttons, no touch)
+* On-device motion analysis that filters out normal train vibration
+* Silent BLE pre-alert before any audible alarm
+* A verification window that gives the owner a chance to confirm intent
+* Fully local decision-making on the ESP32 — no cloud dependency
+
+The entire decision pipeline runs locally on the ESP32, so BagBee works reliably even without internet connectivity.
 
 ---
 
@@ -54,27 +91,27 @@ This makes alerts more meaningful by giving the owner a short verification windo
 
 <p align="center">
 <img src="bagbee-cover.jpg" width="800"><br/>
-<i>BagBee touchless verified-alert luggage security concept</i>
+<i>BagBee — touchless, verified-alert luggage security concept</i>
 </p>
 
 <p align="center">
 <img src="prototype.jpg" width="800"><br/>
-<i>BagBee prototype built around the MYOSA Mini IoT Kit</i>
+<i>BagBee prototype, built using the MYOSA Mini IoT Kit</i>
 </p>
 
 <p align="center">
 <img src="gesture-arming.jpg" width="800"><br/>
-<i>Touchless multi-step gesture sequence used for arming</i>
+<i>The touchless gesture sequence used to arm the system</i>
 </p>
 
 <p align="center">
 <img src="ble-alert.jpg" width="800"><br/>
-<i>Silent BLE pre-alert received by the owner's smartphone</i>
+<i>Silent BLE pre-alert received on the owner's smartphone</i>
 </p>
 
 <p align="center">
 <img src="alarm-demo.jpg" width="800"><br/>
-<i>Audible escalation stage after unverified suspicious movement</i>
+<i>Alarm escalation after an unverified, suspicious movement</i>
 </p>
 
 ### Videos
@@ -87,127 +124,184 @@ This makes alerts more meaningful by giving the owner a short verification windo
 
 ## Features (Detailed)
 
-### 1. Touchless Gesture-PIN Arming and Disarming
+### 1. Touchless Gesture-Based Security PIN
 
-BagBee uses the **APDS9960 Gesture & Proximity Sensor** with an ordered multi-step gesture sequence that acts as a security PIN. This reduces accidental arming/disarming and resists casual interference.
+BagBee uses the **APDS9960 Gesture & Proximity Sensor** for fully touchless interaction. A predefined, multi-step gesture sequence acts as a security PIN for arming and disarming the device, giving users:
 
-### 2. Continuous Motion Monitoring Using MPU6050
+* Contactless operation
+* Fewer accidental activations
+* Better resistance to casual tampering
 
-The **MPU6050 IMU** continuously tracks luggage motion while armed, establishing baseline behavior and detecting deviations.
+### 2. Intelligent Motion Monitoring
 
-### 3. Adaptive Vibration Filtering
+The **MPU6050 IMU** continuously tracks luggage movement while the system is armed, capturing:
 
-Filtering distinguishes normal high-frequency train vibration from sustained low-frequency drift (drag/lift behavior), reducing false alarms.
+* Movement intensity
+* Orientation changes
+* Spatial disturbances
+
+The goal isn't to react to every twitch — it's to recognize patterns consistent with suspicious handling, such as dragging or lifting.
+
+### 3. Vibration Filtering and False-Alarm Reduction
+
+Train environments are full of constant, low-level vibration. BagBee applies motion-analysis techniques to filter out noise from:
+
+* Railway vibration
+* Minor environmental disturbances
+* Small accidental knocks
+
+This keeps alerts meaningful instead of routine — and worth the owner's attention.
 
 ### 4. Silent BLE Pre-Alert
 
-When suspicious movement is detected, ESP32 sends a **silent BLE alert** first, avoiding immediate public alarm.
+When suspicious movement is detected, BagBee doesn't sound an alarm right away. It first sends a **silent Bluetooth Low Energy (BLE)** notification to the owner's smartphone, giving them the first chance to respond before anything becomes audible.
 
 ### 5. Owner Verification Window
 
-The owner gets a short response window to confirm intentional movement. Confirmed events can be silently dismissed.
+Once alerted, the owner has a short window to verify what happened:
+
+* **Intentional movement** → the alert is dismissed
+* **No response** → the system escalates automatically
+
+```text
+Detection → Notification → Verification → Escalation
+```
 
 ### 6. Multi-Stage Alarm Escalation
 
-If verification is not received in time, BagBee escalates to buzzer + local warning display.
+If a suspicious movement goes unverified, BagBee moves to its final warning stage:
 
-### 7. Tamper-Distinct Alarm Path
+* Piezo buzzer alarm
+* Local OLED warning display
 
-Node-level tamper attempts while armed follow a separate escalation path, not only motion-based logic.
+This ensures unattended, unverified movement never goes unanswered.
 
-### 8. Edge-Based Processing on ESP32
+### 7. Tamper Detection
 
-Gesture, filtering, decision logic, BLE signaling, and escalation run locally on device for reliability in low-connectivity travel environments.
+Beyond monitoring the luggage itself, BagBee has a separate detection path for tampering with the device while it's armed — covering both:
+
+* Suspicious luggage movement
+* Attempts to interfere with the security node directly
+
+### 8. Edge-Based Processing
+
+Every major decision happens locally on the ESP32:
+
+* Gesture recognition
+* Motion analysis
+* Alert decision logic
+* BLE communication
+* Alarm escalation
+
+This makes BagBee genuinely portable — no continuous internet connection required.
 
 ---
 
 ## Usage Instructions
 
-1. Connect required MYOSA Mini IoT Kit components and piezo buzzer.
-2. Upload firmware (`src/bagbee.ino`) to ESP32.
-3. Power on the node and complete gesture-PIN arming.
-4. Place the node with luggage and keep phone ready for BLE pre-alert.
-5. On suspicious motion, verify intentional movement within the prompt window.
-6. If ignored/unverified, the system escalates to audible alarm.
+1. Assemble the MYOSA Mini IoT Kit components along with the required sensors and buzzer.
+2. Upload the firmware:
+
+```plaintext
+src/bagbee.ino
+```
+
+3. Power on the device.
+4. Perform the gesture PIN sequence to arm BagBee.
+5. Place the device with your luggage.
+6. When suspicious movement occurs:
+   * The ESP32 analyzes the motion on-device.
+   * A silent BLE notification is sent to your smartphone.
+7. Verify whether the movement was intentional.
+8. If no verification is received in time, the system escalates to the audible alarm.
 
 ---
 
 ## Tech Stack
 
-* **Hardware:** ESP32, APDS9960, MPU6050, SSD1306 OLED, Piezo buzzer, LiPo battery
-* **Firmware:** C++ on Arduino/ESP32 framework
-* **Communication:** Bluetooth Low Energy (BLE)
-* **Architecture:** Embedded edge state-machine with local filtering and escalation logic
+**Hardware**
+
+* **ESP32** — Microcontroller
+* **APDS9960** — Gesture & Proximity Sensor
+* **MPU6050** — IMU Sensor
+* **SSD1306** — OLED Display
+* **Piezo Buzzer**
+* **3.7V LiPo Battery**
+
+**Software**
+
+* Arduino IDE / ESP32 Framework
+* Embedded C++
+* Bluetooth Low Energy (BLE)
+* Sensor processing algorithms
+* State-machine based decision logic
 
 ---
 
 ## Requirements / Installation
 
-### Hardware Requirements
+**Hardware Requirements**
 
 * MYOSA Mini IoT Kit
 * ESP32 board
-* APDS9960 Gesture & Proximity Sensor
-* MPU6050 IMU
-* SSD1306 OLED display
-* Piezo buzzer
-* 3.7V LiPo battery with charging/protection
-* Smartphone for BLE verification demo
+* APDS9960 Gesture Sensor
+* MPU6050 IMU Sensor
+* SSD1306 OLED Display
+* Piezo Buzzer
+* 3.7V LiPo Battery with charging protection
+* Smartphone with BLE support
 
-### Software Requirements
+**Software Requirements**
 
-* Arduino IDE 2.x (or compatible ESP32 environment)
+* Arduino IDE 2.x or a compatible ESP32 development environment
 * ESP32 board package
-* Sensor/OLED libraries used by firmware
+* Required sensor and display libraries
 
-### Installation
+**Installation**
 
 ```bash
 # Arduino IDE workflow
-# 1) Install ESP32 board package
-# 2) Install required libraries
-# 3) Open src/bagbee.ino
-# 4) Verify and upload to ESP32
+1. Install the ESP32 board package
+2. Install the required libraries
+3. Open src/bagbee.ino
+4. Select your ESP32 board
+5. Upload the firmware
 ```
 
 ---
 
-## File Structure (Optional)
+## File Structure
 
 ```text
 MYOSA-6.0-bagbee/
 ├── bagbee.md
-├── bagbee-demo.mp4
-├── assets/
-│   └── images/
-│       └── bagbee/
-│           ├── bagbee-cover.jpg
-│           ├── prototype.jpg
-│           ├── gesture-arming.jpg
-│           ├── ble-alert.jpg
-│           └── alarm-demo.jpg
-├── src/
-│   ├── bagbee.ino
-│   └── README_SETUP.md
 ├── README.md
-└── LICENSE
+├── LICENSE
+├── bagbee-cover.jpg
+├── prototype.jpg
+├── gesture-arming.jpg
+├── ble-alert.jpg
+├── alarm-demo.jpg
+├── bagbee-demo.mp4
+└── src/
+    └── bagbee.ino
 ```
 
 ---
 
-## License (Optional)
+## License
 
 This project is released under the **MIT License**. See `LICENSE` for full terms.
 
 ---
 
-## Contribution Notes (Optional)
+## Contribution Notes
 
-BagBee was built for MYOSA Event 6.0 as a practical personal-security concept using edge sensing and staged alert verification.
+Planned improvements for BagBee include:
 
-Suggested future contributions:
+* Improving motion-classification accuracy across different travel environments
+* Optimizing battery consumption for longer standby operation
+* Refining the smartphone-side verification experience
+* Designing a compact enclosure suited to real luggage integration
 
-* Improve motion classification across diverse travel scenarios.
-* Optimize battery usage for longer runtime.
-* Enhance smartphone-side UX for faster verification.
-* Improve enclosure design for robust luggage integration.
+BagBee was built as a hands-on exploration of edge sensing, embedded intelligence, and verified-alert security design using the MYOSA Mini IoT Kit.
