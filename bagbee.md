@@ -17,7 +17,7 @@ tags:
 
 BagBee was developed as part of **MYOSA Event 6.0 - IEEE SENSORS 2026** using the MYOSA Mini IoT Kit.
 
-We would like to acknowledge the MYOSA platform for providing an embedded sensing environment that allowed us to explore a practical edge-based IoT security application. We also thank our faculty mentor, **Dr. Lekshmi Mohan**, for her guidance and support throughout the development of the project.
+We would like to acknowledge the MYOSA platform for providing an embedded sensing environment that allowed us to explore a practical edge-based IoT security application. We also thank our faculty mentor, Dr. Lekshmi Mohan, for her guidance and support throughout the development of this project.
 
 ---
 
@@ -25,17 +25,17 @@ We would like to acknowledge the MYOSA platform for providing an embedded sensin
 
 BagBee is a **touchless, verified-alert security node designed for unattended luggage during long-distance train journeys**.
 
-The idea comes from a familiar situation faced by railway passengers: having to sleep or rest while their luggage remains unattended under or beside their berth. Conventional solutions such as chains, locks, and basic motion alarms can provide deterrence, but they do not necessarily distinguish between genuine unauthorized movement and the continuous vibration experienced during a train journey.
+The idea comes from a familiar situation faced by railway passengers: having to sleep or rest while their luggage remains unattended under or beside their berth. Conventional solutions such as chains, locks, or basic motion alarms have significant limitations.
 
-A simple motion alarm can therefore create frequent false alarms. At the same time, immediately triggering a loud alarm does not give the owner an opportunity to determine whether the movement was intentional.
+A simple motion alarm can therefore create frequent false alarms. At the same time, immediately triggering a loud alarm does not give the owner an opportunity to determine whether the movement was intentional or suspicious.
 
 BagBee approaches this problem differently.
 
-Instead of treating every movement as a theft event, the system follows a **layered detection-and-verification pipeline**. A touchless gesture sequence is used as a security PIN for arming and disarming. Once armed, an MPU6050 continuously monitors the luggage's motion. The ESP32 processes this information locally and applies filtering intended to distinguish normal train vibration from sustained movement associated with dragging or lifting.
+Instead of treating every movement as a theft event, the system follows a **layered detection-and-verification pipeline**. A touchless gesture sequence is used as a security PIN for arming and disarming, combined with motion analysis to understand the nature of detected movement.
 
 When suspicious movement is detected, BagBee does **not immediately sound the alarm**.
 
-It first sends a silent pre-alert to the owner's smartphone using Bluetooth Low Energy. The owner is given a short verification window. If the movement was intentional, the event can be silently dismissed. If there is no response, the system escalates to an audible alarm.
+It first sends a silent pre-alert to the owner's smartphone using Bluetooth Low Energy. The owner is given a short verification window. If the movement was intentional, the event can be silently dismissed.
 
 This transforms the traditional:
 
@@ -66,27 +66,27 @@ model into:
 All images are placed in the same folder as this Markdown file.
 
 <p align="center">
-<img src="bagbee-cover.jpg" width="800"><br/>
+<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/bagbee-cover.jpg" width="800"><br/>
 <i>BagBee - Touchless, verified-alert security node for unattended luggage</i>
 </p>
 
 <p align="center">
-<img src="prototype.jpg" width="800"><br/>
+<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/prototype.jpg" width="800"><br/>
 <i>BagBee prototype built around the MYOSA Mini IoT Kit</i>
 </p>
 
 <p align="center">
-<img src="gesture-arming.jpg" width="800"><br/>
+<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/gesture-arming.jpg" width="800"><br/>
 <i>Touchless gesture sequence used to arm the BagBee security node</i>
 </p>
 
 <p align="center">
-<img src="ble-alert.jpg" width="800"><br/>
+<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/ble-alert.jpg" width="800"><br/>
 <i>Silent BLE pre-alert received by the owner's smartphone</i>
 </p>
 
 <p align="center">
-<img src="alarm-demo.jpg" width="800"><br/>
+<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/alarm-demo.jpg" width="800"><br/>
 <i>Final alarm escalation following an unverified suspicious movement</i>
 </p>
 
@@ -96,7 +96,8 @@ All images are placed in the same folder as this Markdown file.
 The complete BagBee demonstration is provided as a local MP4 file in the same folder as this Markdown file.
 
 <video controls width="100%">
-<source src="bagbee-demo.mp4" type="video/mp4">
+<source src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/bagbee-demo.mp4" type="video/mp4">
+Your browser does not support the video tag.
 </video>
 
 The demonstration follows four stages:
