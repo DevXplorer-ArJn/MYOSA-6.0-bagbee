@@ -225,7 +225,7 @@ src/bagbee.ino
 * **APDS9960** — Gesture & Proximity Sensor
 * **MPU6050** — IMU Sensor
 * **SSD1306** — OLED Display
- **BMP180**  —  Barometric pressure sensor
+* **BMP180**  —  Barometric pressure sensor
 * **Piezo Buzzer**
 * **3.7V LiPo Battery**
 
@@ -248,6 +248,7 @@ src/bagbee.ino
 * APDS9960 Gesture Sensor
 * MPU6050 IMU Sensor
 * SSD1306 OLED Display
+* BMP180  —  Barometric pressure sensor
 * Piezo Buzzer
 * 3.7V LiPo Battery with charging protection
 * Smartphone with BLE support
