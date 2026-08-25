@@ -53,27 +53,27 @@ This makes alerts more meaningful by giving the owner a short verification windo
 ### Images
 
 <p align="center">
-<img src="/assets/images/bagbee/bagbee-cover.jpg" width="800"><br/>
+<img src="bagbee-cover.jpg" width="800"><br/>
 <i>BagBee touchless verified-alert luggage security concept</i>
 </p>
 
 <p align="center">
-<img src="/assets/images/bagbee/prototype.jpg" width="800"><br/>
+<img src="prototype.jpg" width="800"><br/>
 <i>BagBee prototype built around the MYOSA Mini IoT Kit</i>
 </p>
 
 <p align="center">
-<img src="/assets/images/bagbee/gesture-arming.jpg" width="800"><br/>
+<img src="gesture-arming.jpg" width="800"><br/>
 <i>Touchless multi-step gesture sequence used for arming</i>
 </p>
 
 <p align="center">
-<img src="/assets/images/bagbee/ble-alert.jpg" width="800"><br/>
+<img src="ble-alert.jpg" width="800"><br/>
 <i>Silent BLE pre-alert received by the owner's smartphone</i>
 </p>
 
 <p align="center">
-<img src="/assets/images/bagbee/alarm-demo.jpg" width="800"><br/>
+<img src="alarm-demo.jpg" width="800"><br/>
 <i>Audible escalation stage after unverified suspicious movement</i>
 </p>
 
