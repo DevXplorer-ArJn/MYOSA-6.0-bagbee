@@ -1,4 +1,4 @@
-**BagBee — A Touchless, Verified-Alert Security Node for Unattended Luggage on Long-Distance Train Journeys**
+## BagBee — A Touchless, Verified-Alert Security Node for Unattended Luggage on Long-Distance Train Journeys
 
 **Published:** August 23, 2026  
 **Category:** IoT Security | ESP32 | Edge Computing  
