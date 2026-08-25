@@ -1,4 +1,4 @@
-# 🐝 BagBee
+# BagBee
 
 ### A Touchless, Verified-Alert Security Node for Unattended Luggage on Long-Distance Train Journeys
 
@@ -10,7 +10,7 @@ Instead of relying on a simple motion-triggered alarm, BagBee uses a **layered, 
 
 ---
 
-## 🎯 The Problem
+## The Problem
 
 On long-distance train journeys, passengers often have to sleep while their luggage remains unattended under or beside their berth.
 
@@ -25,7 +25,7 @@ Traditional solutions such as chains, locks, or basic motion alarms have limitat
 
 ---
 
-## 💡 Our Approach
+## Our Approach
 
 BagBee continuously monitors the luggage while remaining unobtrusive.
 
@@ -70,15 +70,15 @@ This allows BagBee to respond differently to **normal environmental movement** a
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🔐 Gesture-Based Security PIN
+### Gesture-Based Security PIN
 
 BagBee uses the **APDS9960 gesture sensor** for touchless arming and disarming.
 
 Instead of a single gesture, a specific multi-step gesture sequence acts as a security PIN, reducing the possibility of accidental or casual disarming.
 
-### 📈 Vibration vs. Theft Detection
+### Vibration vs. Theft Detection
 
 The **MPU6050 IMU** continuously monitors the luggage's spatial movement.
 
@@ -90,13 +90,13 @@ BagBee applies filtering and motion analysis to distinguish:
 
 The objective is to avoid treating every movement as a theft event.
 
-### 📱 Silent BLE Pre-Alert
+### Silent BLE Pre-Alert
 
 When suspicious movement is detected, BagBee first sends a **silent notification to the owner's smartphone using Bluetooth Low Energy (BLE)**.
 
 The audible alarm is not immediately activated.
 
-### ✅ Verification Window
+### Verification Window
 
 The owner receives a verification prompt asking whether the detected movement was intentional.
 
@@ -104,7 +104,7 @@ If the owner confirms the movement, the system can be silently disarmed.
 
 If there is no response within the verification window, BagBee proceeds to the next stage.
 
-### 🚨 Multi-Stage Alarm Escalation
+### Multi-Stage Alarm Escalation
 
 If suspicious movement remains unverified, the system escalates to an audible alarm using a **piezo buzzer** and local warning indication.
 
@@ -112,13 +112,13 @@ This creates a progression from:
 
 **Detection → Notification → Verification → Escalation**
 
-### 🛡️ Tamper Detection
+### Tamper Detection
 
 BagBee also provides a separate escalation path for unauthorized attempts to interfere with the security node while it is armed.
 
 ---
 
-## 🔧 Hardware
+## Hardware
 
 BagBee is built around the **MYOSA Mini IoT Kit** and uses its core components for distinct functions.
 
@@ -134,7 +134,7 @@ BagBee is built around the **MYOSA Mini IoT Kit** and uses its core components f
 
 ---
 
-## 🧠 System Architecture
+## System Architecture
 
 BagBee performs its core decision-making locally on the ESP32.
 
@@ -162,7 +162,7 @@ The filtering, gesture logic, and escalation state machine are designed to run *
 
 ---
 
-## 🚆 Intended Application
+##  Intended Application
 
 BagBee is primarily designed for:
 
@@ -176,7 +176,7 @@ The concept can also serve as a foundation for other portable asset-monitoring a
 
 ---
 
-## 🧪 Demonstration
+## Demonstration
 
 The planned demonstration showcases the complete security pipeline:
 
@@ -210,7 +210,7 @@ pipeline.
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 * **ESP32**
 * **Arduino / ESP32 Framework**
@@ -224,7 +224,7 @@ pipeline.
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```text
 MYOSA-6.0-bagbee/
@@ -249,7 +249,7 @@ The detailed MYOSA project documentation, demonstration media, usage instruction
 
 ---
 
-## 👥 Team
+##  Team
 
 ### BagBee — MYOSA Event 6.0
 
@@ -273,7 +273,7 @@ College of Engineering Trivandrum
 
 ---
 
-## 🌱 Vision
+## Vision
 
 BagBee explores how a small edge-computing platform can transform a simple motion alarm into a **context-aware, verified security system**.
 
@@ -283,7 +283,7 @@ Rather than reacting to every movement, the system attempts to understand the di
 
 ---
 
-## 📜 License
+## License
 
 This project is released under the **MIT License**.
 
