@@ -66,27 +66,27 @@ model into:
 All images are placed in the same folder as this Markdown file.
 
 <p align="center">
-<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/bagbee-cover.jpg" width="800"><br/>
+<img src="bagbee-cover.jpg" width="800"><br/>
 <i>BagBee - Touchless, verified-alert security node for unattended luggage</i>
 </p>
 
 <p align="center">
-<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/prototype.jpg" width="800"><br/>
+<img src="prototype.jpg" width="800"><br/>
 <i>BagBee prototype built around the MYOSA Mini IoT Kit</i>
 </p>
 
 <p align="center">
-<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/gesture-arming.jpg" width="800"><br/>
+<img src="gesture-arming.jpg" width="800"><br/>
 <i>Touchless gesture sequence used to arm the BagBee security node</i>
 </p>
 
 <p align="center">
-<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/ble-alert.jpg" width="800"><br/>
+<img src="ble-alert.jpg" width="800"><br/>
 <i>Silent BLE pre-alert received by the owner's smartphone</i>
 </p>
 
 <p align="center">
-<img src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/alarm-demo.jpg" width="800"><br/>
+<img src="alarm-demo.jpg" width="800"><br/>
 <i>Final alarm escalation following an unverified suspicious movement</i>
 </p>
 
@@ -96,7 +96,7 @@ All images are placed in the same folder as this Markdown file.
 The complete BagBee demonstration is provided as a local MP4 file in the same folder as this Markdown file.
 
 <video controls width="100%">
-<source src="https://github.com/DevXplorer-ArJn/MYOSA-6.0-bagbee/raw/main/bagbee-demo.mp4" type="video/mp4">
+<source src="bagbee-demo.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
 
@@ -113,6 +113,8 @@ The demonstration follows four stages:
 This sequence demonstrates the core security concept of BagBee:
 
 **Detect → Notify → Verify → Escalate**
+
+If `alarm-demo.jpg` or `bagbee-demo.mp4` is missing in your local/project copy, place those files in the same folder as `bagbee.md` using these exact names before final MYOSA submission.
 
 ---
 
@@ -369,6 +371,9 @@ The system completes the complete security pipeline:
 ├── README.md
 ├── LICENSE
 ├── bagbee.md
+├── src/
+│   ├── bagbee.ino
+│   └── README_SETUP.md
 ├── bagbee-cover.jpg
 ├── prototype.jpg
 ├── gesture-arming.jpg
