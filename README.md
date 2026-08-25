@@ -58,8 +58,7 @@ This lets the system tell the difference between everyday environmental jostling
 
 BagBee is built for:
 
-* Long-distance railway passengers
-* Sleeper-class travelers
+* Railway passengers
 * Backpack and luggage users
 * Anyone who needs portable, unattended asset monitoring
 
@@ -71,6 +70,7 @@ BagBee brings together several sensing and communication technologies:
 * **MPU6050 IMU** — for continuous motion monitoring
 * **ESP32** — for edge-based processing and decision-making
 * **BLE communication** — for silent alerts to the owner
+* **BMP180**  —  Barometric pressure sensor for altitude sensing 
 * **Piezo buzzer** — for final alarm escalation
 
 **Key features:**
@@ -225,6 +225,7 @@ src/bagbee.ino
 * **APDS9960** — Gesture & Proximity Sensor
 * **MPU6050** — IMU Sensor
 * **SSD1306** — OLED Display
+ **BMP180**  —  Barometric pressure sensor
 * **Piezo Buzzer**
 * **3.7V LiPo Battery**
 
