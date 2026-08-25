@@ -70,7 +70,7 @@ BagBee brings together several sensing and communication technologies:
 * **MPU6050 IMU** — for continuous motion monitoring
 * **ESP32** — for edge-based processing and decision-making
 * **BLE communication** — for silent alerts to the owner
-* **BMP180**  —  Barometric pressure sensor for altitude sensing 
+* **BMP180**  —  Barometric pressure sensor for altitude sensing to check bag lifting 
 * **Piezo buzzer** — for final alarm escalation
 
 **Key features:**
